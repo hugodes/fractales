@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include "utilitaires.h"
 #include "display.h"
-#include <GL/gl.h>
-#include <GL/glu.h>
-#include <GL/glut.h>
+#include <openGL/gl.h>
+#include <openGL/glu.h>
+#include <glut/glut.h>
 #include <math.h>
 
 int** t;//tableau
