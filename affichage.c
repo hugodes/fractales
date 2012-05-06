@@ -3,9 +3,9 @@
 #include "utilitaires.h"
 #include "global.h"
 #include "affichage.h"
-#include <GL/gl.h>
-#include <GL/glu.h>
-#include <GL/glut.h>
+#include <openGL/gl.h>
+#include <openGL/glu.h>
+#include <glut/glut.h>
 
 couleur* tabCouleur;
 int nbCouleur = 10;

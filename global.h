@@ -1,8 +1,8 @@
 #ifndef GLOBAL_H
 #define GLOBAL_H
-#include <GL/gl.h>
-#include <GL/glu.h>
-#include <GL/glut.h>
+#include <openGL/gl.h>
+#include <openGL/glu.h>
+#include <glut/glut.h>
 
 extern int** t;          //Tableau
 extern int largeur;      //Largeur de la fenêtre

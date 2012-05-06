@@ -1,6 +1,6 @@
-#include <GL/gl.h>
-#include <GL/glu.h>
-#include <GL/glut.h>
+#include <openGL/gl.h>
+#include <openGL/glu.h>
+#include <glut/glut.h>
 
 typedef struct {
   GLfloat rouge;
