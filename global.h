@@ -1,8 +1,18 @@
 #ifndef GLOBAL_H
 #define GLOBAL_H
+
+#ifdef Linux
+#include <GL/gl.h>
+#include <GL/glu.h>
+#include <GL/glut.h>
+#endif
+
+#ifdef __APPLE__
 #include <openGL/gl.h>
 #include <openGL/glu.h>
 #include <glut/glut.h>
+#endif
+
 
 extern int** t;          //Tableau
 extern int largeur;      //Largeur de la fenêtre

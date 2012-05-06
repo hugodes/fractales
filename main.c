@@ -3,9 +3,19 @@
 #include "utilitaires.h"
 #include "interactions.h"
 #include "affichage.h"
+
+#ifdef Linux
+#include <GL/gl.h>
+#include <GL/glu.h>
+#include <GL/glut.h>
+#endif
+
+#ifdef __APPLE__
 #include <openGL/gl.h>
 #include <openGL/glu.h>
 #include <glut/glut.h>
+#endif
+
 #include <math.h>
 
 int** t;          //Tableau

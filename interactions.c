@@ -2,9 +2,19 @@
 #include <stdlib.h>
 #include "utilitaires.h"
 #include "global.h"
+
+#ifdef Linux
+#include <GL/gl.h>
+#include <GL/glu.h>
+#include <GL/glut.h>
+#endif
+
+#ifdef __APPLE__
 #include <openGL/gl.h>
 #include <openGL/glu.h>
 #include <glut/glut.h>
+#endif
+
 
 void zoom(double degree, long double centreRe, long double centreIm){
     long double ecartRe = (maxRe-minRe)/2;
