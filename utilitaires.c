@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <pthread.h>
 #include "utilitaires.h"
 #include "global.h"
+
+#define NUM_THREADS 16
 
 int** initTab(int largeur, int hauteur)//Allocation mémoire du tableau
 {
@@ -14,31 +17,58 @@ int** initTab(int largeur, int hauteur)//Allocation mémoire du tableau
 }
 void rempliTab(){
 
-  long double facteur_Re = (maxRe-minRe)/largeur; 
-  long double facteur_Im =  (maxIm-minIm)/hauteur;
-  long double px_Re;
-  long double px_Im;
+    //printf("J'entre dans rempli tab\n");
+    pthread_t threads[NUM_THREADS]; //creation de threads
+    int rc; //variable du reslultat de chaque threads
+    long tid; // compteur de threads
+    long double facteur_Re = (maxRe-minRe)/largeur; 
+    long double facteur_Im =  (maxIm-minIm)/hauteur;
+    long double px_Re;
+    long double px_Im;
 
-  switch(fractale){
-  case 1 :
-    for (int i=0; i<largeur; i++) {
+    switch(fractale){
+    case 1 :
+    /*for (int i=0; i<largeur; i++) {
       px_Re=minRe+i*facteur_Re;//partie réelle de c
       for(int j=0; j<hauteur; j++) {
-	px_Im=maxIm+-j*facteur_Im;//partie imaginaire de c
-	t[i][j]=calculNLim(px_Re, px_Im,px_Re, px_Im, 1);
+    px_Im=maxIm+-j*facteur_Im;//partie imaginaire de c
+    t[i][j]=calculNLim(px_Re, px_Im,px_Re, px_Im, 1);
       }
-    }
+    }*/
+        for (tid=0; tid<NUM_THREADS; tid++) {
+            //printf("Je créé le thread n° %ld\n", tid);
+            rc = pthread_create(&threads[tid], NULL, CalculNCol, (void *)tid);
+        }
+    pthread_exit(NULL);
     break;
-  case 2 :
+    case 2 :
      for (int i=0; i<largeur; i++) {
       px_Re=minRe+i*facteur_Re;//partie réelle de c
       for(int j=0; j<hauteur; j++) {
-	px_Im=maxIm+-j*facteur_Im;//partie imaginaire de c
-	t[i][j]=calculNLim(juliaRe, juliaIm,px_Re, px_Im, 0);
+        px_Im=maxIm+-j*facteur_Im;//partie imaginaire de c
+        t[i][j]=calculNLim(juliaRe, juliaIm,px_Re, px_Im, 0);
       }
     }
      break;
-  }
+    }
+}
+void *CalculNCol(void *threadid){
+    long double facteur_Re = (maxRe-minRe)/largeur; 
+    long double facteur_Im =  (maxIm-minIm)/hauteur;
+    long double px_Re;
+    long double px_Im;
+    long tid = (long)threadid; //recuperation du numero du thread
+    //printf("Je suis dans le thread n° %ld\n", tid);
+
+    for (int i=tid*largeur/NUM_THREADS; i<(tid+1)*largeur/NUM_THREADS; i++) {
+        px_Re=minRe+i*facteur_Re;//partie réelle de c
+        for(int j=0; j<hauteur; j++) {
+            px_Im=maxIm+-j*facteur_Im;//partie imaginaire de c
+            //printf("Je rempli la case %d %d\n", i, j);
+            t[i][j]=calculNLim(px_Re, px_Im,px_Re, px_Im, 1);
+        }
+    }
+    pthread_exit(NULL);
 }
 
 int calculNLim(long double c_Re, long double c_Im, long double z_Re, long double z_Im, int n)

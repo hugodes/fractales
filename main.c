@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <pthread.h>
 #include "utilitaires.h"
 #include "interactions.h"
 #include "affichage.h"
@@ -65,6 +66,7 @@ int main(int argc, char **argv, char **env) {
     t=initTab(largeur, hauteur);
 
     rempliTab();//Remplissage du tableau
+    pthread_exit(NULL);
 
     //------------------------------------INITIALISATION OPENGL---------------------------------------
 	

@@ -9,4 +9,5 @@ int calculNLim(long double, long double, long double, long double, int);
 //Libere l'espace alloué pour le tableau
 void freeTab(int, int);
 void init(int);
+void *CalculNCol(void *threadid);
 #endif
