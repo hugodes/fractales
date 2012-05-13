@@ -20,7 +20,8 @@
 couleur* tabCouleur;
 couleur* couleursDegrade;
 int nbCouleur=0;
-int nbCouleurDegrade=0;
+int nbCouleurDegrade=128;
+int nMaxAffiche=1000;
 couleur noir = {0.0,0.0,0.0};
 couleur blanc = {1.0,1.0,1.0};
 couleur bleu = {0.0,0.0,1.0};
@@ -34,20 +35,31 @@ couleur bleuFonce = {0.0,0.0,0.25};
 void initColorTab(){
   couleursDegrade=malloc(100*sizeof(couleur));  
   
-  addCouleur(rouge);
-  addCouleur(bleuFonce);
+  addCouleurf(0.0,0.0,0.20);
   addCouleur(blanc);
-  addCouleur(rouge);
-  addCouleur(bleuFonce);
+  addCouleurf(0.0,0.20,0.40);
   addCouleur(blanc);
-  addCouleur(rouge);
-  addCouleur(bleuFonce);
+  addCouleurf(0.20,0.40,0.60);
+  addCouleur(blanc);
+  addCouleurf(0.40,0.60,0.80);
+  addCouleur(blanc);
+  addCouleurf(0.60,0.80,1.0);
+  addCouleur(blanc);
+  addCouleurf(0.20,0.0,0.0);
+  addCouleur(blanc);
+  addCouleurf(0.40,0.20,0.0);
+  addCouleur(blanc);
+  addCouleurf(0.60,0.40,0.20);
+  addCouleur(blanc);
+  addCouleurf(0.80,0.60,0.40);
+  addCouleur(blanc);
+  addCouleurf(1.0,0.80,0.60);
   addCouleur(blanc);
 
-  tabCouleur=malloc((nbCouleurDegrade)*sizeof(couleur));
+  tabCouleur=malloc(((nbCouleur-1)*nbCouleurDegrade)*sizeof(couleur));
   for(int i=0;i<nbCouleur-1;i++){
-    for(int j=0;j<128;j++){
-      tabCouleur[128*i+j]=degrade(couleursDegrade[i],couleursDegrade[i+1],(float)j/(float)127);
+    for(int j=0;j<nbCouleurDegrade;j++){
+      tabCouleur[nbCouleurDegrade*i+j]=degrade(couleursDegrade[i],couleursDegrade[i+1],(float)j/(float)127);
     }  
   }
   free(couleursDegrade);
@@ -60,11 +72,15 @@ couleur getColor(int n){
   }else{
     switch(modeCouleur){
     case 1:
-      indC = nbCouleurDegrade*(float)n/nMax;
+      indC = (nbCouleur-1)*(float)nbCouleurDegrade*(float)n/nMax;
       return tabCouleur[indC];
       break;
     case 2 :
-      indC = n*nbCouleurDegrade/500;
+      if(n>nMaxAffiche){
+	indC=(nbCouleur-1)*nbCouleurDegrade-1;
+      }else{
+	indC = n*(nbCouleur-1)*nbCouleurDegrade/nMaxAffiche;
+      }
       return tabCouleur[indC];
       break;
     case 3 :
@@ -113,5 +129,9 @@ void drawCouleur(int x, int y, couleur c){
 void addCouleur(couleur c){
   couleursDegrade[nbCouleur]=c;
   nbCouleur++;
-  nbCouleurDegrade=(nbCouleur-1)*128;
+}
+
+void addCouleurf(float rouge, float vert, float bleu){
+  couleur c={rouge,vert,bleu};
+  addCouleur(c);
 }

@@ -40,10 +40,30 @@ int modeCouleur = 1; //variable d'état (1 pour RVB, 2 pour LSM/M)
 float pasZoom = 1.5;//puissance du zoom;
 int pasPrecision = 25;//modification de la précision (nMax)
 
+void afficheAscii(){
+  largeur = 20;
+  hauteur = 20;
+  t=initTab(largeur,hauteur);
+  nMax=99;
+  rempliTab();
+  printf("\n");
+  for(int i=0;i<largeur;i++){
+    for(int j=0;j<hauteur;j++){
+      if(t[j][i]<=9){
+	 printf("%i  ",t[j][i]);
+      }else{
+	printf("%i ",t[j][i]);
+      }
+    }
+    printf("\n");
+  }
+}
+
 
 int main(int argc, char **argv, char **env) {
-
-  if (argc == 3) {
+  if ((argc == 2) && (atoi(argv[1])==0)){
+    afficheAscii();
+  }else if (argc == 3) {
 
     //Dimensions de l'image en pixels
     largeur = atoi(argv[1]);
