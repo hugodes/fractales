@@ -1,4 +1,4 @@
-#ifdef Linux
+#ifdef __linux__
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
@@ -18,9 +18,9 @@ typedef struct {
 } couleur;
 
 void initColorTab();
-int getIndColor(int);
 couleur getColor(int);
 void draw();
 void freeTabColor();
 couleur degrade(couleur,couleur,float);
 void drawCouleur(int,int,couleur);
+void addCouleur(couleur);

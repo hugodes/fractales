@@ -3,7 +3,7 @@
 #include "utilitaires.h"
 #include "global.h"
 
-#ifdef Linux
+#ifdef __linux__
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
@@ -84,12 +84,14 @@ void GestionSpecial(int key, int x, int y){
     break;
   case GLUT_KEY_F5 :
     modeCouleur = 1;
-    rempliTab();
     glutPostRedisplay();
     break;
   case GLUT_KEY_F6 :
     modeCouleur = 2;
-    rempliTab();
+    glutPostRedisplay();
+    break;
+  case GLUT_KEY_F7 :
+    modeCouleur = 3;
     glutPostRedisplay();
     break;
   }
@@ -97,11 +99,11 @@ void GestionSpecial(int key, int x, int y){
 
 void GestionClavier(unsigned char key, int x, int y){
   if(key=='+'){
-    nMax+=100;
+    nMax+=50;
     rempliTab();
     glutPostRedisplay();
   }else{
-    nMax-=100;
+    nMax-=50;
     rempliTab();
     glutPostRedisplay();
   }
