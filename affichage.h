@@ -24,3 +24,4 @@ void freeTabColor();
 couleur degrade(couleur,couleur,float);
 void drawCouleur(int,int,couleur);
 void addCouleur(couleur);
+void addCouleurf(float,float,float);
