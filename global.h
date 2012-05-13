@@ -1,7 +1,7 @@
 #ifndef GLOBAL_H
 #define GLOBAL_H
 
-#ifdef Linux
+#ifdef __linux__
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>

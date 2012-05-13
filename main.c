@@ -4,7 +4,7 @@
 #include "interactions.h"
 #include "affichage.h"
 
-#ifdef Linux
+#ifdef __linux__
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
@@ -19,7 +19,6 @@
 #include <math.h>
 
 int** t;          //Tableau
-GLfloat** colorMap;   //Tableau de couleurs
 int largeur;      //Largeur de la fenêtre
 int hauteur;      //Hauteur de la fenêtre
 char* nom;        //Nom de la fenêtre
