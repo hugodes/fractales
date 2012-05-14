@@ -12,9 +12,9 @@
 
 
 typedef struct {
-  GLfloat rouge;
-  GLfloat vert;
-  GLfloat bleu;
+  float rouge;
+  float vert;
+  float bleu;
 } couleur;
 
 void initColorTab();

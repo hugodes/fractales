@@ -1,0 +1,41 @@
+****************************************************************
+Source disponible sur www.gihub.com/he116ra1n/fractales
+****************************************************************
+
+***Compilation***
+
+	Compilation Linux
+$ make Linux
+	Compilaion Mac
+$ make mac
+
+***Lancement***
+
+pour lancer l'application on utilise la commande mandel avec 2 paramètres qui sont la largeur et la hauteur souhaiter pour la fenêtre.
+Ex :
+$ mandel 800 600
+Initialise une fenêtre de 800*600 pixel dans laquelle l'ensemble de Mandelbrot serra affiché.
+
+***Utilisation***
+
+Une fois notre fractale affiché, nous avons la possibilité de l'explorer ou a modifié de diverses façons :
+On peut zoomer au clavier, au centre de la fenêtre avec les touches :
+Page Up pour zoomer
+Page Down pour dézoomer
+On peut se déplacer et explorer la fractale en surface avec les touches fléchés du clavier :
+haut pour monter
+bas pour descendre
+droite pour aller à droite
+gauche pour aller à gauche
+On peut zoomer en choisissant le point centrale du zoom en se servant de la souris :
+bouton gauche pour zoomer
+bouton droite pour dézoomer
+On peut afficher un ensemble de Julia correspondant au point complexe visé par la souris avec la touche F2
+On peut modifié le mode de 	couleur d'affichage. Pour cela, nous avons un choix entre trois mode :
+Affichage proportionnelle à la précision : F5
+Affichage linéaire : F6
+Affichage LSM/M : F7
+Nous avons deux choix possible pour la réinitialisation du zoom:
+Une réinitialisation simple du 	zoom en gardant la fractale affiché : End
+Une réinitialisation complète au mandelbrot initiale : F1
+Dans les deux cas le mode de couleur reste inchangé.

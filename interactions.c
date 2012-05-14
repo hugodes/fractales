@@ -26,7 +26,9 @@ void zoom(double degree, long double centreRe, long double centreIm){
     if(degree<1){
       nMax+=pasPrecision;
     }else{
-      nMax-=pasPrecision;
+      if(nMax>=55){
+	nMax-=pasPrecision;
+      }
     }
     rempliTab();
     glutPostRedisplay();
@@ -103,9 +105,11 @@ void GestionClavier(unsigned char key, int x, int y){
     rempliTab();
     glutPostRedisplay();
   }else{
-    nMax-=50;
-    rempliTab();
-    glutPostRedisplay();
+    if(nMax>=80){
+      nMax-=50;
+      rempliTab();
+      glutPostRedisplay();
+    }
   }
 }
 
