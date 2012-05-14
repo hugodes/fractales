@@ -31,30 +31,31 @@ couleur vert = {0.0,1.0,0.0};
 couleur cyan = {0.0,1.0,1.0};
 couleur magenta = {1.0,0.0,1.0};
 couleur bleuFonce = {0.0,0.0,0.25};
+couleur vertFonce ={0.0,0.25,0.0};
 
 void initColorTab(){
   couleursDegrade=malloc(100*sizeof(couleur));  
   
-  addCouleurf(0.0,0.0,0.20);
+  addCouleur(bleuFonce);
+  addCouleur(cyan);
   addCouleur(blanc);
-  addCouleurf(0.0,0.20,0.40);
+  addCouleur(rouge);
+  addCouleur(jaune);
+  addCouleur(bleuFonce);
+  addCouleur(cyan);
   addCouleur(blanc);
-  addCouleurf(0.20,0.40,0.60);
+  addCouleur(rouge);
+  addCouleur(jaune);
+  addCouleur(bleuFonce);
+  addCouleur(cyan);
   addCouleur(blanc);
-  addCouleurf(0.40,0.60,0.80);
+  addCouleur(rouge);
+  addCouleur(jaune);
+  addCouleur(bleuFonce);
+  addCouleur(cyan);
   addCouleur(blanc);
-  addCouleurf(0.60,0.80,1.0);
-  addCouleur(blanc);
-  addCouleurf(0.20,0.0,0.0);
-  addCouleur(blanc);
-  addCouleurf(0.40,0.20,0.0);
-  addCouleur(blanc);
-  addCouleurf(0.60,0.40,0.20);
-  addCouleur(blanc);
-  addCouleurf(0.80,0.60,0.40);
-  addCouleur(blanc);
-  addCouleurf(1.0,0.80,0.60);
-  addCouleur(blanc);
+  addCouleur(rouge);
+  addCouleur(jaune);
 
   tabCouleur=malloc(((nbCouleur-1)*nbCouleurDegrade)*sizeof(couleur));
   for(int i=0;i<nbCouleur-1;i++){
