@@ -50,25 +50,7 @@ float pasZoom = 1.5;//puissance du zoom;
 int pasPrecision = 25;//modification de la précision (nMax)
 
 //-------------------------------------------------------------------
-/* Les trois fonctions suivantes servent à afficher un mandelbrot en ascii art sur le terminal */
-void afficheTab(){
-  largeur = 20;
-  hauteur = 20;
-  t=initTab(largeur,hauteur);
-  nMax=99;
-  rempliTab();
-  printf("\n");
-  for(int i=0;i<largeur;i++){
-    for(int j=0;j<hauteur;j++){
-      if(t[j][i]<=9){
-	printf("%i  ",t[j][i]);
-      }else{
-	printf("%i ",t[j][i]);
-      }
-    }
-    printf("\n");
-  }
-}
+/* Les 2 fonctions suivantes servent à afficher un mandelbrot en ascii art sur le terminal */
 
 void afficheAsciiMandel(){
   fractale = 1;

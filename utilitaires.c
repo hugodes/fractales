@@ -49,6 +49,25 @@ void rempliTab(){//Rempli le tableau en fonction de la fractale souhaitée
      break;
   }
 }
+//Affiche un tableau 2D dans le terminal
+void afficheTab(){
+  largeur = 20;
+  hauteur = 20;
+  t=initTab(largeur,hauteur);
+  nMax=99;
+  rempliTab();
+  printf("\n");
+  for(int i=0;i<largeur;i++){
+    for(int j=0;j<hauteur;j++){
+      if(t[j][i]<=9){
+	printf("%i  ",t[j][i]);
+      }else{
+	printf("%i ",t[j][i]);
+      }
+    }
+    printf("\n");
+  }
+}
 
 int calculNLim(long double c_Re, long double c_Im, long double z_Re, long double z_Im, int n)
 {

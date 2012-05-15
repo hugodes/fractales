@@ -12,6 +12,8 @@ Spécificités : Ce fichier contient la définition des fonctions du fichier sou
 int** initTab(int, int);
 //On rempli le tableau avec le rang n pour le quel Zn > 2
 void rempliTab();
+//Affiche un tableau 2D dans le terminal
+void afficheTab();
 //Calcule pour un immaginaire donné le n pour lequel Zn >2
 int calculNLim(long double, long double, long double, long double, int);
 //Libere l'espace alloué pour le tableau
