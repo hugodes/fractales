@@ -1,3 +1,12 @@
+/*-----------------------------------------------------------------------------------------------
+Nom : global.h
+Auteurs : Pierre-Alexandre Cimbé, Hugo des Longchamps, Ahmed Rafik
+Projet : Coloration, fractales, ensemble de Mandelbrot
+-------------------------------------------------------------------------------------------------
+Spécificités : Ce fichier contient la définition des variables globales utiles aux différents modules.
+Il est inclus dans chaque fichier source.
+ ---------------------------------------------------------------------------------------------- */
+
 #ifndef GLOBAL_H
 #define GLOBAL_H
 

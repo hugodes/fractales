@@ -1,3 +1,11 @@
+/*-----------------------------------------------------------------------------------------------
+Nom : affichage.h
+Auteurs : Pierre-Alexandre Cimbé, Hugo des Longchamps, Ahmed Rafik
+Projet : Coloration, fractales, ensemble de Mandelbrot
+-------------------------------------------------------------------------------------------------
+Spécificités : Ce fichier contient les définitions des fonctions du fichier source affichage.h
+ --------------------------------------------------------------------------------------------- */
+
 #ifdef __linux__
 #include <GL/gl.h>
 #include <GL/glu.h>
@@ -10,7 +18,7 @@
 #include <glut/glut.h>
 #endif
 
-
+//structure couleur utilisée pour l'affichage
 typedef struct {
   float rouge;
   float vert;

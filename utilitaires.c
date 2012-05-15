@@ -1,3 +1,12 @@
+/*-----------------------------------------------------------------------------------------------
+Nom : utilitaires.c
+Auteurs : Pierre-Alexandre Cimbé, Hugo des Longchamps, Ahmed Rafik
+Projet : Coloration, fractales, ensemble de Mandelbrot
+-------------------------------------------------------------------------------------------------
+Spécificités : Ce fichier contient les différentes fonctions du module de calcul
+de l'ensemble de mandelbrot.
+ ---------------------------------------------------------------------------------------------- */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
@@ -15,7 +24,7 @@ int** initTab(int largeur, int hauteur)//Allocation mémoire du tableau
 	}
 	return t;
 }
-void rempliTab(){
+void rempliTab(){//Rempli le tableau en fonction de la fractale souhaitée
 
     //printf("J'entre dans rempli tab\n");
     pthread_t threads[NUM_THREADS]; //creation de threads
@@ -70,6 +79,25 @@ void *CalculNCol(void *threadid){
     }
     pthread_exit(NULL);
 }
+//Affiche un tableau 2D dans le terminal
+void afficheTab(){
+  largeur = 20;
+  hauteur = 20;
+  t=initTab(largeur,hauteur);
+  nMax=99;
+  rempliTab();
+  printf("\n");
+  for(int i=0;i<largeur;i++){
+    for(int j=0;j<hauteur;j++){
+      if(t[j][i]<=9){
+	printf("%i  ",t[j][i]);
+      }else{
+	printf("%i ",t[j][i]);
+      }
+    }
+    printf("\n");
+  }
+}
 
 int calculNLim(long double c_Re, long double c_Im, long double z_Re, long double z_Im, int n)
 {
@@ -87,7 +115,7 @@ int calculNLim(long double c_Re, long double c_Im, long double z_Re, long double
 	}
 }
 
-void freeTab(int largeur, int hauteur)
+void freeTab(int largeur, int hauteur)//libere l'espace alloué au tableau
 {
 	for (int i=0; i<largeur; i++) {
 		free(t[i]);
@@ -95,11 +123,12 @@ void freeTab(int largeur, int hauteur)
 	free(t);
 }
 
-void init(int frac){
+void init(int frac){//reinitialise les bornes, la precision, pour la fractale demandée
   minRe = -2.0;
   maxRe = 2.0;
   minIm = -2.0;
   maxIm = 2.0;
+  //les bornes sont de nouveaux modifiés en fonction du rapport des dimensions de la fenêtre
   if(largeur>hauteur){
     long double ecart = (maxRe-minRe)*((float)largeur/(float)hauteur-1)/2;
     minRe -= ecart;
