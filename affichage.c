@@ -1,3 +1,12 @@
+/*-----------------------------------------------------------------------------------------------
+Nom : affichage.c
+Auteurs : Pierre-Alexandre Cimbé, Hugo des Longchamps, Ahmed Rafik
+Projet : Coloration, fractales, ensemble de Mandelbrot
+-------------------------------------------------------------------------------------------------
+Spécificités : Ce fichier contient les différentes fonctions du module d'affichage
+de l'ensemble de Mandelbrot.
+ --------------------------------------------------------------------------------------------- */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "utilitaires.h"
@@ -16,12 +25,13 @@
 #include <glut/glut.h>
 #endif
 
+couleur* tabCouleur;//tableau contenant les couleurs disponibles dans le dégradé
+couleur* couleursDegrade;//tableau temporaire utilisé pour créé le précédent
+int nbCouleur=0;//nombre de couleurs utilisées pour définir le dégradé final
+int nbCouleurDegrade=128;//nombre de couleurs définie par un dégradé entre deux couleurs
+int nMaxAffiche=1000;//précision de la méthode d'affichage linéaire
 
-couleur* tabCouleur;
-couleur* couleursDegrade;
-int nbCouleur=0;
-int nbCouleurDegrade=128;
-int nMaxAffiche=1000;
+//ici, on a définit les couleurs basiques et celles utilisées
 couleur noir = {0.0,0.0,0.0};
 couleur blanc = {1.0,1.0,1.0};
 couleur bleu = {0.0,0.0,1.0};
@@ -31,31 +41,18 @@ couleur vert = {0.0,1.0,0.0};
 couleur cyan = {0.0,1.0,1.0};
 couleur magenta = {1.0,0.0,1.0};
 couleur bleuFonce = {0.0,0.0,0.25};
-couleur vertFonce ={0.0,0.25,0.0};
 
-void initColorTab(){
+void initColorTab(){//fonction qui initialise et rempli le tableau de dégradé
   couleursDegrade=malloc(100*sizeof(couleur));  
   
+  //----------------------------------------
+  /*ici on utilise addCouleur pour chaque couleur que l'on souhaite utiliser
+    pour définir le dégradé final*/
   addCouleur(bleuFonce);
-  addCouleur(cyan);
-  addCouleur(blanc);
-  addCouleur(rouge);
   addCouleur(jaune);
-  addCouleur(bleuFonce);
-  addCouleur(cyan);
-  addCouleur(blanc);
   addCouleur(rouge);
-  addCouleur(jaune);
-  addCouleur(bleuFonce);
-  addCouleur(cyan);
-  addCouleur(blanc);
-  addCouleur(rouge);
-  addCouleur(jaune);
-  addCouleur(bleuFonce);
-  addCouleur(cyan);
-  addCouleur(blanc);
-  addCouleur(rouge);
-  addCouleur(jaune);
+
+  //------------------------------------------
 
   tabCouleur=malloc(((nbCouleur-1)*nbCouleurDegrade)*sizeof(couleur));
   for(int i=0;i<nbCouleur-1;i++){
@@ -66,17 +63,17 @@ void initColorTab(){
   free(couleursDegrade);
 }
 
-couleur getColor(int n){
+couleur getColor(int n){//cette fonction retourne la couleur associée à n
   int indC;
   if(n==nMax){
     return noir;
   }else{
     switch(modeCouleur){
-    case 1:
+    case 1://mode d'affichage proportionnel
       indC = (nbCouleur-1)*(float)nbCouleurDegrade*(float)n/nMax;
       return tabCouleur[indC];
       break;
-    case 2 :
+    case 2 ://mode d'affichage linéaire
       if(n>nMaxAffiche){
 	indC=(nbCouleur-1)*nbCouleurDegrade-1;
       }else{
@@ -84,7 +81,7 @@ couleur getColor(int n){
       }
       return tabCouleur[indC];
       break;
-    case 3 :
+    case 3 :// LSM/M
       if(n%2==0){
 	return bleuFonce;
       }else{
@@ -95,7 +92,7 @@ couleur getColor(int n){
   }
 }
 
-void draw(){
+void draw(){//enclenche le tracé
   glClearColor(1.0, 1.0, 1.0, 1.0);
   glClear(GL_COLOR_BUFFER_BIT);
   glMatrixMode(GL_MODELVIEW);
@@ -117,22 +114,22 @@ void freeTabColor(){
   free(tabCouleur);
 }
 
-couleur degrade(couleur c1, couleur c2, float rapport){
+couleur degrade(couleur c1, couleur c2, float rapport){//renvoit le dégradé de deux couleurs en fonction du rapport
   couleur c = {c1.rouge+rapport*(c2.rouge-c1.rouge),c1.vert+rapport*(c2.vert-c1.vert),c1.bleu+rapport*(c2.bleu-c1.bleu)};
   return c;
 } 
 
-void drawCouleur(int x, int y, couleur c){
+void drawCouleur(int x, int y, couleur c){//dessine un point de couleur c
   glColor3f(c.rouge,c.vert,c.bleu);
   glVertex2i(x,y);
 }
 
-void addCouleur(couleur c){
+void addCouleur(couleur c){//ajoute une couleur c aux tableau définissant le dégradé final
   couleursDegrade[nbCouleur]=c;
   nbCouleur++;
 }
 
-void addCouleurf(float rouge, float vert, float bleu){
+void addCouleurf(float rouge, float vert, float bleu){//même, mais avec les composantes RGB directement
   couleur c={rouge,vert,bleu};
   addCouleur(c);
 }

@@ -1,3 +1,12 @@
+/*-----------------------------------------------------------------------------------------------
+Nom : utilitaires.c
+Auteurs : Pierre-Alexandre Cimbé, Hugo des Longchamps, Ahmed Rafik
+Projet : Coloration, fractales, ensemble de Mandelbrot
+-------------------------------------------------------------------------------------------------
+Spécificités : Ce fichier contient les différentes fonctions du module de calcul
+de l'ensemble de mandelbrot.
+ ---------------------------------------------------------------------------------------------- */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "utilitaires.h"
@@ -12,7 +21,7 @@ int** initTab(int largeur, int hauteur)//Allocation mémoire du tableau
 	}
 	return t;
 }
-void rempliTab(){
+void rempliTab(){//Rempli le tableau en fonction de la fractale souhaitée
 
   long double facteur_Re = (maxRe-minRe)/largeur; 
   long double facteur_Im =  (maxIm-minIm)/hauteur;
@@ -57,7 +66,7 @@ int calculNLim(long double c_Re, long double c_Im, long double z_Re, long double
 	}
 }
 
-void freeTab(int largeur, int hauteur)
+void freeTab(int largeur, int hauteur)//libere l'espace alloué au tableau
 {
 	for (int i=0; i<largeur; i++) {
 		free(t[i]);
@@ -65,11 +74,12 @@ void freeTab(int largeur, int hauteur)
 	free(t);
 }
 
-void init(int frac){
+void init(int frac){//reinitialise les bornes, la precision, pour la fractale demandée
   minRe = -2.0;
   maxRe = 2.0;
   minIm = -2.0;
   maxIm = 2.0;
+  //les bornes sont de nouveaux modifiés en fonction du rapport des dimensions de la fenêtre
   if(largeur>hauteur){
     long double ecart = (maxRe-minRe)*((float)largeur/(float)hauteur-1)/2;
     minRe -= ecart;

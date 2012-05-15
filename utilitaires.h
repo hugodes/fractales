@@ -1,3 +1,11 @@
+/*-----------------------------------------------------------------------------------------------
+Nom : utilitaires.h
+Auteurs : Pierre-Alexandre Cimbé, Hugo des Longchamps, Ahmed Rafik
+Projet : Coloration, fractales, ensemble de Mandelbrot
+-------------------------------------------------------------------------------------------------
+Spécificités : Ce fichier contient la définition des fonctions du fichier source utilitaires.c
+ ---------------------------------------------------------------------------------------------- */
+
 #ifndef UTILITAIRES_H
 #define UTILITAIRES_H
 //On alloue dynamiquement l'espace pour ce tableau.
@@ -8,5 +16,6 @@ void rempliTab();
 int calculNLim(long double, long double, long double, long double, int);
 //Libere l'espace alloué pour le tableau
 void freeTab(int, int);
+//reinitialise les bornes à leur valeur initiale
 void init(int);
 #endif

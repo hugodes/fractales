@@ -1,3 +1,12 @@
+/*-----------------------------------------------------------------------------------------------
+Nom : main.c
+Auteurs : Pierre-Alexandre Cimbé, Hugo des Longchamps, Ahmed Rafik
+Projet : Coloration, fractales, ensemble de Mandelbrot
+-------------------------------------------------------------------------------------------------
+Spécificités : Ce fichier contient la fonction main de l'application. Il initialise OpenGl et 
+fait appel aux différents module du programme afin de générer l'affichage initial.
+ ---------------------------------------------------------------------------------------------- */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "utilitaires.h"
@@ -40,7 +49,9 @@ int modeCouleur = 1; //variable d'état (1 pour RVB, 2 pour LSM/M)
 float pasZoom = 1.5;//puissance du zoom;
 int pasPrecision = 25;//modification de la précision (nMax)
 
-void afficheAsciiMandel(){
+//-------------------------------------------------------------------
+/* Les trois fonctions suivantes servent à afficher un mandelbrot en ascii art sur le terminal */
+void afficheTab(){
   largeur = 20;
   hauteur = 20;
   t=initTab(largeur,hauteur);
@@ -50,39 +61,30 @@ void afficheAsciiMandel(){
   for(int i=0;i<largeur;i++){
     for(int j=0;j<hauteur;j++){
       if(t[j][i]<=9){
-	 printf("%i  ",t[j][i]);
+	printf("%i  ",t[j][i]);
       }else{
 	printf("%i ",t[j][i]);
       }
     }
     printf("\n");
   }
+}
+
+void afficheAsciiMandel(){
+  fractale = 1;
+  afficheTab();
 }
 
 void afficheAsciiJulia(){
-  largeur = 20;
-  hauteur = 20;
   fractale=2;
-  juliaRe = 0.1;
-  juliaIm = 0.3;
-  t=initTab(largeur,hauteur);
-  nMax=99;
-  rempliTab();
-  printf("\n");
-  for(int i=0;i<largeur;i++){
-    for(int j=0;j<hauteur;j++){
-      if(t[j][i]<=9){
-	 printf("%i  ",t[j][i]);
-      }else{
-	printf("%i ",t[j][i]);
-      }
-    }
-    printf("\n");
-  }
+  juliaRe = -0.5;
+  juliaIm = 0.5;
+  afficheTab();
 }
-
+//-----------------------------------------------------------------------
 
 int main(int argc, char **argv, char **env) {
+  //selon les arguments, ascii ou affichage 
   if ((argc == 2) && (atoi(argv[1])==0)){
     afficheAsciiMandel();
   }
@@ -96,6 +98,7 @@ int main(int argc, char **argv, char **env) {
     hauteur = atoi(argv[2]);
     //Nom de la fenêtre
     nom="Mandelbrot";
+    //le code suivant permet de modifier les bornes pour garder un affichage proportionné de l'ensemble dans le cas où largeur et hauteur sont différentes.
     if(largeur>hauteur){
       GLdouble ecart = (maxRe-minRe)*((double)largeur/(double)hauteur-1)/2;
       minRe -= ecart;
